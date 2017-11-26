@@ -89,6 +89,12 @@ RCT_EXPORT_METHOD(isReady:(RCTResponseSenderBlock)callback)
     callback(@[[NSNumber numberWithBool:[_interstitial isReady]]]);
 }
 
+RCT_EXPORT_METHOD(reset)
+{
+    _interstitial.delegate = nil;
+    _interstitial = nil;
+}
+
 - (NSDictionary<NSString *,id> *)constantsToExport
 {
     return @{

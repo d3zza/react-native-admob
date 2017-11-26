@@ -202,6 +202,23 @@ public class RNAdMobInterstitialAdModule extends ReactContextBaseJavaModule {
         });
     }
 
+    @ReactMethod
+    public void reset() {
+        final String adUnitId = mInterstitialAd.getAdUnitId();
+        final InterstitialAd newInterstitialAd = new InterstitialAd(mReactApplicationContext);
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                newInterstitialAd.setAdListener( adListener );
+            }
+        });
+        if( adUnitId != null ){
+            newInterstitialAd.setAdUnitId(adUnitId);
+            mInterstitialAds.put(adUnitId, newInterstitialAd);
+        }
+        mInterstitialAd = newInterstitialAd;
+    }
+
     @javax.annotation.Nullable
     @Override
     public Map<String, Object> getConstants() {
